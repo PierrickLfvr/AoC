@@ -51,24 +51,6 @@ class Seeds:
     def __init__(self, start, end):
         self.start = start
         self.end = end
-        self.subset = None
-
-    def get_min_location(self):
-        if self.subset == None:
-            return self.start
-        return min(self.start, self.susbet.get_min_location())
-    
-    def apply_bins(self, bins):
-        for bin in bins:
-            applied = bin.apply(self.start)
-            if self.start != applied:
-                self.start = applied
-                limit = self.start+bin.end-bin.start
-                if limit < self.end:
-                    self.subset = Seeds(limit, self.end).apply_bins(bins)
-                    self.end = limit
-                
-                
 
 def part2():
     mini = 9999999999

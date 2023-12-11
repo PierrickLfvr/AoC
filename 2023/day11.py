@@ -9,8 +9,8 @@ grid2 = np.array(grid)
 rows_to_insert = []
 for i,line in enumerate(grid2):
     if line.sum() == 0:
-        #insert line of zeros
         rows_to_insert.append(i)
+
 for i, row in enumerate(rows_to_insert):
     grid2 = np.insert(grid2, row+i, np.zeros(len(grid2[0])), axis=0)
 
@@ -18,6 +18,7 @@ columns_to_insert = []
 for i, column in enumerate(grid.T):
     if column.sum() == 0:
         columns_to_insert.append(i)
+        
 for i, column in enumerate(columns_to_insert):
     grid2 = np.insert(grid2, column+i, np.zeros(len(grid2)), axis=1)
 

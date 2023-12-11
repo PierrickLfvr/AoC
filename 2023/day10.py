@@ -6,8 +6,6 @@ for i, line in enumerate(open('inputs/10.txt')):
     grid.append([c for c in line.strip()])
     if not start and "S" in line:
         start = (i, line.strip().index("S"))
-#print(np.array(grid))
-#print(start)
 
 def get_starting_directions(grid, start):
     directions = []
@@ -83,9 +81,11 @@ def part2():
     current_pos = directions_to_explore[0]
     previous_pos = start
     direction = (0, 1)
-    #print(grid[current_pos[0]][current_pos[1]])
+
     while current_pos != start:
+
         fill_grid(grid2, current_pos, direction)
+
         if grid[current_pos[0]][current_pos[1]] == 'L':
             direction = (-direction[1], -direction[0])
         elif grid[current_pos[0]][current_pos[1]] == 'F':
@@ -94,13 +94,13 @@ def part2():
             direction = (-direction[1], -direction[0])
         elif grid[current_pos[0]][current_pos[1]] == 'J':
             direction = (direction[1], direction[0])
+            
         fill_grid(grid2, current_pos, direction)
+
         next_pos = get_next_direction(grid, current_pos, previous_pos)
         previous_pos = current_pos
         current_pos = next_pos
-        #print("going to ", current_pos)
-        #print("from ", previous_pos)
-    #count number of 1s
+
     print(f'Part 2: {np.sum(grid2=="1")}')
     
 part2()
