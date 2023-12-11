@@ -18,7 +18,7 @@ columns_to_insert = []
 for i, column in enumerate(grid.T):
     if column.sum() == 0:
         columns_to_insert.append(i)
-        
+
 for i, column in enumerate(columns_to_insert):
     grid2 = np.insert(grid2, column+i, np.zeros(len(grid2)), axis=1)
 
@@ -50,19 +50,11 @@ def part2(expansion=1000000):
     for galaxy in galaxies:
         for galaxy2 in galaxies:
             if galaxy != galaxy2:
-                dist = 0
-                for l in range(min(galaxy[0], galaxy2[0])+1, max(galaxy[0], galaxy2[0])+1):
-                    if l in rows_to_insert:
-                        dist+=expansion
-                    else:
-                        dist+=1
-                for m in range(min(galaxy[1], galaxy2[1])+1, max(galaxy[1], galaxy2[1])+1):
-                    
-                    if m in columns_to_insert:
-                        dist+=expansion
-                    else:
-                        dist+=1
-                    
+
+                matching_rows = len(set(range(min(galaxy[0], galaxy2[0])+1, max(galaxy[0], galaxy2[0])+1)).intersection(rows_to_insert))
+                matching_columns = len(set(range(min(galaxy[1], galaxy2[1])+1, max(galaxy[1], galaxy2[1])+1)).intersection(columns_to_insert))
+                dist = (matching_rows+matching_columns)*(expansion-1)+abs(galaxy[0]-galaxy2[0])+abs(galaxy[1]-galaxy2[1])
+                
                 sum+=dist
     print(f'Part 2: {sum//2}')
 part2()
